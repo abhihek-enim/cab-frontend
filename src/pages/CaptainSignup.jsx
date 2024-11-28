@@ -65,7 +65,7 @@ const CaptainSignup = () => {
             type="password"
             placeholder="password"
           />
-
+          <h3 className="text-lg font-medium mb-2">Vehicle Details</h3>
           <div className="grid grid-cols-2 gap-4 mb-7">
             <input
               value={vehicle.color}
@@ -112,7 +112,7 @@ const CaptainSignup = () => {
           <button className="bg-[#111111] text-white font-semibold mb-7 rounded px-4 py-2 border w-full text-lg">
             Sign Up
           </button>
-          <p className="text-left mb-3 text-xl">
+          <p className="text-left mb-3 text-[18px]">
             Already have an account?{" "}
             <Link to="/captain-login" className="text-blue-600">
               Login here.
@@ -120,9 +120,6 @@ const CaptainSignup = () => {
           </p>
         </form>
       </div>
-      <p className="text-center text-sm text-gray-500 mt-4">
-        By signing up, you agree to our Terms of Service and Privacy Policy.
-      </p>
     </div>
   );
 };
