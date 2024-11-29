@@ -1,15 +1,34 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { postData } from "../utils/apiService";
+import { UserDataContext } from "../context/userContext";
 
 const UserSignup = () => {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const { setUser } = useContext(UserDataContext);
 
-  function onSubmitHandler(e) {
+  async function onSubmitHandler(e) {
     e.preventDefault();
-    console.log({ firstname, lastname, email, password });
+    const newUser = {
+      fullname: {
+        firstname: firstname,
+        lastname: lastname,
+      },
+      email: email,
+      password: password,
+    };
+    const res = await postData("/user/register", newUser);
+    if (res.success) {
+      setUser(res.user);
+
+      navigate("/home");
+    }
+
+    // console.log({ firstname, lastname, email, password });
   }
 
   return (

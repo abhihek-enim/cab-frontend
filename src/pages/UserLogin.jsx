@@ -1,11 +1,20 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { postData } from "../utils/apiService";
+import { UserDataContext } from "../context/userContext";
 
 const UserLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  function onSubmitHandler(e) {
+  const navigate = useNavigate();
+  const { setUser } = useContext(UserDataContext);
+  async function onSubmitHandler(e) {
     e.preventDefault();
+    let res = await postData("/user/login", { email, password });
+    if (res.success) {
+      setUser(res.user);
+      navigate("/home");
+    }
   }
   return (
     <div className="h-screen p-7 flex flex-col justify-between ">
