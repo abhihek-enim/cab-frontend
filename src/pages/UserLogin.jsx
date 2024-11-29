@@ -13,6 +13,7 @@ const UserLogin = () => {
     let res = await postData("/user/login", { email, password });
     if (res.success) {
       setUser(res.user);
+      localStorage.setItem("uberToken", res.token);
       navigate("/home");
     }
   }

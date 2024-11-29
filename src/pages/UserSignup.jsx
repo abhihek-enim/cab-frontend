@@ -24,6 +24,7 @@ const UserSignup = () => {
     const res = await postData("/user/register", newUser);
     if (res.success) {
       setUser(res.user);
+      localStorage.setItem("uberToken", res.token);
 
       navigate("/home");
     }

@@ -1,5 +1,7 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { CaptainDataContext } from "../context/CaptainContext";
+import { postData } from "../utils/apiService";
 
 const CaptainSignup = () => {
   const [firstname, setFirstname] = useState("");
@@ -12,10 +14,27 @@ const CaptainSignup = () => {
     plate: "",
     vehicleType: "",
   });
-
-  function onSubmitHandler(e) {
+  const { setCaptain } = useContext(CaptainDataContext);
+  const navigate = useNavigate();
+  async function onSubmitHandler(e) {
     e.preventDefault();
-    console.log({ firstname, lastname, email, password, ...vehicle });
+    let newCaptain = {
+      fullname: {
+        firstname: firstname,
+        lastname: lastname,
+      },
+      email: email,
+      password: password,
+      vehicle: vehicle,
+    };
+    let res = await postData("/captain/register", newCaptain);
+    if (res.success) {
+      setCaptain(res.captain);
+      localStorage.setItem("uberToken", res.token);
+      navigate("/home");
+    }
+
+    // console.log({ firstname, lastname, email, password, ...vehicle });
   }
 
   return (

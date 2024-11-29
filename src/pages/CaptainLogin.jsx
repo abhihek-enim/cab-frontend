@@ -1,11 +1,21 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { postData } from "../utils/apiService";
+import { CaptainDataContext } from "../context/CaptainContext";
 
 const CaptainLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  function onSubmitHandler(e) {
+  const { setCaptain } = useContext(CaptainDataContext);
+  const navigate = useNavigate();
+  async function onSubmitHandler(e) {
     e.preventDefault();
+    let res = await postData("/captain/login", { email, password });
+    if (res.success) {
+      setCaptain(res.captain);
+      localStorage.setItem("uberToken", res.token);
+      navigate("/home");
+    }
   }
   return (
     <div className="h-screen p-7 flex flex-col justify-between ">

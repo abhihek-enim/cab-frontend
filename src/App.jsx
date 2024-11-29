@@ -5,13 +5,21 @@ import UserSignup from "./pages/UserSignup.jsx";
 import CaptainSignup from "./pages/CaptainSignup.jsx";
 import CaptainLogin from "./pages/CaptainLogin.jsx";
 import Start from "./pages/Start.jsx";
+import UserProtectWrapper from "./components/UserProtectWrapper.jsx";
 
 const App = () => {
   return (
     <>
       <Routes>
         <Route path="/" element={<Start />} />
-        <Route path="/home" element={<Home />} />
+        <Route
+          path="/home"
+          element={
+            <UserProtectWrapper>
+              <Home />
+            </UserProtectWrapper>
+          }
+        />
         <Route path="/login" element={<UserLogin />} />
         <Route path="/signup" element={<UserSignup />} />
         <Route path="/captain-login" element={<CaptainLogin />} />
