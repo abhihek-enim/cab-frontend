@@ -31,7 +31,7 @@ const CaptainSignup = () => {
     if (res.success) {
       setCaptain(res.captain);
       localStorage.setItem("uberToken", res.token);
-      navigate("/home");
+      navigate("/captain-home");
     }
 
     // console.log({ firstname, lastname, email, password, ...vehicle });
