@@ -21,7 +21,7 @@ const handleError = (error) => {
 // GET request function
 export const getData = async (url, customConfig = {}) => {
   try {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("uberToken");
     const config = {
       headers: {
         Authorization: token ? token : "",
@@ -39,7 +39,7 @@ export const getData = async (url, customConfig = {}) => {
 // POST request function
 export const postData = async (url, data, customConfig = {}) => {
   try {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("uberToken");
 
     const config = {
       headers: {
@@ -67,7 +67,7 @@ export const postData = async (url, data, customConfig = {}) => {
 // PUT request function
 export const putData = async (url, data, customConfig = {}) => {
   try {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("uberToken");
     const config = {
       headers: {
         Authorization: token ? `${token}` : "",
@@ -85,7 +85,7 @@ export const putData = async (url, data, customConfig = {}) => {
 // PATCH request function
 export const patchData = async (url, data, customConfig = {}) => {
   try {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("uberToken");
     const config = {
       headers: {
         Authorization: token ? `${token}` : "",
@@ -103,7 +103,7 @@ export const patchData = async (url, data, customConfig = {}) => {
 // DELETE request function
 export const deleteData = async (url, customConfig = {}) => {
   try {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("uberToken");
     const config = {
       headers: {
         Authorization: token ? `${token}` : "",
